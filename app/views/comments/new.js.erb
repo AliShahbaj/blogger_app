@@ -1,2 +1,1 @@
-console.log(document.querySelector("#reply-form-<%= @comment.parent_id %>"))
 document.querySelector("#reply-form-<%= @comment.parent_id %>").innerHTML = ("<%= j render 'reply_form', comment: @comment %>")

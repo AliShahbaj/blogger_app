@@ -4,9 +4,10 @@
     <div id="comment_<%= comment.id %>">
       <% if !comment.parent_id.present? %>
       <p class="m-0">
-        <span><%= comment.body %> <%= link_to 'reply', new_post_comment_path(post, parent_id: comment.id), remote: true %></span>
+        <span><%= comment.body %> <%= link_to 'Reply', new_post_comment_path(post, parent_id: comment.id), remote: true, class: "float-right" %></span>
       </p>
       <em><%= comment.post.user.email %> - <%= comment.created_at.to_formatted_s(:short) %></em>
+       <hr>
       <% end %>
       <div id="replies_<%= comment.id %>">
         <% if comment.replies.any? %>
@@ -15,7 +16,6 @@
           <% end %>
         <% end %>
       </div>
-      <hr>
     </div>
     <div id="reply-form-<%= comment.id %>"></div>
   <% end %>
