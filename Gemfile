@@ -57,3 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Rails and authentication mechanisms
 gem 'devise'
 gem 'jquery-rails'
+gem 'rexml'
+group :development, :test do
+  gem 'rspec-rails', '~> 5.0.0'
+end
