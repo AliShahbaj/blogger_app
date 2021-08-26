@@ -5,4 +5,6 @@ class Post < ApplicationRecord
   has_many :likes
   has_many :liking_users, :through => :likes, :source => :user
   has_one_attached :image
+  #Validation
+  validates :title, presence: true
 end
