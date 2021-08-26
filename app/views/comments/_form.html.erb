@@ -11,7 +11,7 @@
   <% end %>
   <%= form_with url: post_comments_url(comment.post_id), :html => {:id => "comment_form_#{comment.post_id}" } do |form| %>
     <div class="d-flex flex-row align-items-start">
-      <%= form.text_area :body, class: "form-control ml-1 shadow-none textarea" %>
+      <%= form.text_area :body, class: "form-control ml-1 shadow-none textarea", placeholder: "Comment Box" %>
       <%= form.hidden_field :user_id, value: current_user.id %>
     </div>
     <div class="mt-2 text-right">

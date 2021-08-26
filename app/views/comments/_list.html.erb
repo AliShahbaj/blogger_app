@@ -6,7 +6,7 @@
       <p class="m-0">
         <span><%= comment.body %> <%= link_to 'Reply', new_post_comment_path(post, parent_id: comment.id), remote: true, class: "float-right" %></span>
       </p>
-      <em><%= comment.post.user.email %> - <%= comment.created_at.to_formatted_s(:short) %></em>
+      <em><%= comment.user.email %> - <%= comment.created_at.to_formatted_s(:short) %> (GMT)</em>
        <hr>
       <% end %>
       <div id="replies_<%= comment.id %>">

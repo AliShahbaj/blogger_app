@@ -57,6 +57,7 @@ class PostsController < ApplicationController
     end
   end
 
+  # POST /posts/1/like_post
   def like_post
     @like = Like.where(user_id: current_user.id, post_id: @post.id).try(:first)
     if @like.present?
