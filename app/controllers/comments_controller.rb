@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
   # GET /posts/post_id/comments/new
   def new
-    @comment = Comment.new
+    @comment = @post.comments.new(parent_id: params[:parent_id])
   end
 
   # GET /posts/post_id/comments/1/edit
@@ -21,7 +21,8 @@ class CommentsController < ApplicationController
         body: @comment.body,
         time: @comment.created_at.to_formatted_s(:short),
         email: @comment.post.user.email,
-        total_comments: Post.find(@comment.post_id).comments.count 
+        total_comments: Post.find(@comment.post_id).comments.count,
+        parent_id: @comment.parent_id
       }
       ActionCable.server.broadcast('comment_channel', { comment: comment_data })
     else
@@ -42,6 +43,6 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.permit(:post_id, :user_id, :body)
+      params.permit(:post_id, :user_id, :body, :parent_id)
     end
 end

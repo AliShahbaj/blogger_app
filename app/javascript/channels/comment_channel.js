@@ -12,10 +12,15 @@ consumer.subscriptions.create("CommentChannel", {
 
   received(data) {
     let comment = data.comment;
-    $(`.post_${comment.post_id}`).append(`<div id="comment_${comment.id}"> <p class="m-0"><span>${comment.body}</span></p> <em>${comment.email} - ${comment.time}</em> <hr> </div>`);
-    $(`#comment_count`).html(`${comment.total_comments}`);
-    document.getElementById(`comment_form_${comment.post_id}`).reset();
-    document.getElementById(`sbmt_${comment.post_id}`).removeAttribute("disabled")
+    if(comment.parent_id){
+      console.log($(`#replies_${comment.id}`))
+    }
+    else{
+      $(`.post_${comment.post_id}`).append(`<div id="comment_${comment.id}"> <p class="m-0"><span>${comment.body} <a data-remote="true" href="/posts/7/comments/new?parent_id=${comment.id}">reply</a></span></p> <em>${comment.email} - ${comment.time}</em><div id="replies_${comment.id}"></div> <hr> </div>`);
+      $(`#comment_${comment.id}`).after(`<div id="reply-form-${comment.id}"></div>`)
+      document.getElementById(`comment_form_${comment.post_id}`).reset();
+      document.getElementById(`sbmt_${comment.post_id}`).removeAttribute("disabled")
+    }
     // Called when there's incoming data on the websocket for this channel
   }
 });

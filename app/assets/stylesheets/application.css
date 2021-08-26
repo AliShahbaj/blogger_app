@@ -53,3 +53,12 @@
   color: #000;
   background-color: #fff;
 }
+
+.reply{
+  border: 1px solid #c2c1c1;
+  padding: 5px;
+  border-radius: 7px;
+}
+.reply p{
+  margin: 0px;
+}
