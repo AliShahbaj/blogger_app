@@ -1,24 +1,26 @@
-# README
+## Requirements
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Make sure you have installed:
 
-Things you may want to cover:
+* Ruby 3.0.2
+* Postgresql 10 or latest
+* Yarn
 
-* Ruby version
+For Rails version and gems see Gemfile.
 
-* System dependencies
+## Setup
+1. Clone the Repo
+2. bundle install
+3. Update databse credentials in config/database.yml
+4. bundle exec rails db:create
+5. bundle exec rails db:migrate
+6. Start Rails server `rails s`
 
-* Configuration
 
-* Database creation
+### Running Test Cases
 
-* Database initialization
+We are using Rspec for test cases.
 
-* How to run the test suite
+`RAILS_ENV=test rake db:test:prepare`
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`bundle exec rspec spec`
