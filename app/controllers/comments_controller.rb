@@ -14,17 +14,20 @@ class CommentsController < ApplicationController
   # POST /posts/post_id/comments
   def create
     @comment = @post.comments.new(comment_params)
-
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to root_path }
-        format.js
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    if @comment.save
+      comment_data = {
+        id: @comment.id,
+        post_id: @comment.post_id,
+        body: @comment.body,
+        time: @comment.created_at.to_formatted_s(:short),
+        email: @comment.post.user.email,
+        total_comments: Post.find(@comment.post_id).comments.count 
+      }
+      ActionCable.server.broadcast('comment_channel', { comment: comment_data })
+    else
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: @comment.errors, status: :unprocessable_entity }
     end
-
   end
 
   private

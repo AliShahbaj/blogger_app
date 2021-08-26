@@ -1,9 +1,10 @@
-<% if comments.count > 0 %>
-  <h3>Comments</h3>
+<h3>Comments</h3>
+<div class="post_<%= post.id %>">
   <% comments.each do |comment| %>
-    <p><span><%= comment.body %></span></p>
-    <em><%= time_ago_in_words(comment.created_at) %>: <%= comment.post.user.email %></em>
-    <hr>
+    <div id="comment_<%= comment.id %>">
+      <p class="m-0"><span><%= comment.body %></span> <i class="fa fa-reply pl-5 comment-reply" id="<%= comment.id %>" aria-hidden="true"></i></p>
+      <em><%= comment.post.user.email %> - <%= comment.created_at.to_formatted_s(:short) %></em>
+      <hr>
+    </div>
   <% end %>
-
-<% end %>
+</div>
