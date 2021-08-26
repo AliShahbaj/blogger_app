@@ -45,3 +45,11 @@
 .textarea {
   resize: none
 }
+
+.liked {
+  color: blue;
+}
+.like-btn:hover{
+  color: #000;
+  background-color: #fff;
+}

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ show edit update destroy like_post ]
 
   # GET /posts
   def index
@@ -54,6 +54,27 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def like_post
+    @like = Like.where(user_id: current_user.id, post_id: @post.id).try(:first)
+    if @like.present?
+      @like.destroy
+      respond_to do |format|
+        format.html
+        format.js # handle ajax request
+      end
+    else
+      @like = @post.likes.build(user_id: current_user.id)
+      respond_to do |format|
+        if @like.save
+          format.html
+          format.js # handle ajax request
+        else
+          redirect_to root
+        end
+      end
     end
   end
 

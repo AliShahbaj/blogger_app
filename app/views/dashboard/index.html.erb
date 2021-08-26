@@ -31,9 +31,16 @@
             <%= render './comments/list', comments: post.comments, post: post %>
             <div class="bg-white">
               <div class="d-flex flex-row fs-12">
-                <div class="like p-2 cursor">
-                  <i class="fa fa-thumbs-o-up"></i>
-                  <span class="ml-1">Like</span>
+                <div class="like p-2 cursor d-flex">
+                  <%@user_like = Like.where(user_id: current_user.id, post_id: post.id).try(:first)%>
+                  <%if @user_like.present?%>
+                    <%= link_to '<i class="fa fa-thumbs-o-up"></i> <span class="icon_text mr-1">Unlike</span>'.html_safe, like_post_posts_url({id: post.id}), class:"like-btn liked", remote: true, method: :post %>
+                  <%else%>
+                    <%= link_to '<i class="fa fa-thumbs-o-up"></i> <span class="icon_text mr-1">Like</span>'.html_safe, like_post_posts_url({id: post.id}), class:"like-btn", remote: true, method: :post %>
+                  <%end%>
+                  <div id="like_div">
+                    <%= render(partial: "posts/like_post", locals: {likes:  post.likes.count}) %>
+                  </div>
                 </div>
               </div>
             </div>
