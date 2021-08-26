@@ -62,3 +62,7 @@
 .reply p{
   margin: 0px;
 }
+
+.edit_post_btn, .destroy_post_btn{
+  color: #fff !important;
+}
