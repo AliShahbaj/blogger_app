@@ -13,6 +13,5 @@ ActiveStorage.start()
 
 import $ from 'jquery';
 import './bootstrap/dist/js/bootstrap'
-import './bootstrap/dist/css/bootstrap'
 window.$ = $;
 // require("stylesheets/application.scss")
