@@ -13,7 +13,7 @@ consumer.subscriptions.create("CommentChannel", {
   received(data) {
     let comment = data.comment;
     if(comment.parent_id){
-      $(`#replies_${comment.parent_id}`).append(`<div class="reply ml-5"> <p class="pt-1 pb-0"><span>${comment.body}</span></p> <em class="pt-1 pb-0">${comment.email} - ${comment.time} (GMT)</em> </div><hr>`);
+      $(`#replies_${comment.parent_id}`).append(`<div class="reply ml-5 mb-5"> <p class="pt-1 pb-0"><span>${comment.body}</span></p> <em class="pt-1 pb-0">${comment.email} - ${comment.time} (GMT)</em> </div><hr>`);
       document.getElementById(`comment_reply_form_${comment.post_id}`).reset()
       console.log(document.getElementById(`rpbtn_${comment.parent_id}`))
       document.getElementById(`rpbtn_${comment.parent_id}`).removeAttribute("disabled")
